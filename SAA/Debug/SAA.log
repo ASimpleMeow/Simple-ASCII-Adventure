@@ -1,0 +1,8 @@
+﻿  Level.cpp
+c:\users\oleksandr\desktop\other\c++  projects\workspace\saa\saa\level.cpp(32): warning C4018: '<': signed/unsigned mismatch
+c:\users\oleksandr\desktop\other\c++  projects\workspace\saa\saa\level.cpp(33): warning C4018: '<': signed/unsigned mismatch
+c:\users\oleksandr\desktop\other\c++  projects\workspace\saa\saa\level.cpp(82): warning C4018: '<': signed/unsigned mismatch
+c:\users\oleksandr\desktop\other\c++  projects\workspace\saa\saa\level.cpp(120): warning C4101: 'moveTile': unreferenced local variable
+c:\users\oleksandr\desktop\other\c++  projects\workspace\saa\saa\level.cpp(186): warning C4018: '<': signed/unsigned mismatch
+  SAA.vcxproj -> C:\Users\Oleksandr\Desktop\Other\C++  Projects\workspace\SAA\Debug\SAA.exe
+  SAA.vcxproj -> C:\Users\Oleksandr\Desktop\Other\C++  Projects\workspace\SAA\Debug\SAA.pdb (Full PDB)
