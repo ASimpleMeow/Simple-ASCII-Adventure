@@ -1,5 +1,6 @@
 #include "GameSystem.h"
 
+#include <conio.h>
 
 
 //Constructor sets up the game

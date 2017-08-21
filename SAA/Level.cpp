@@ -1,5 +1,8 @@
 #include "Level.h"
 
+#include <string>
+#include <fstream>
+#include <iostream>
 
 
 Level::Level() {

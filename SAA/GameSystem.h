@@ -1,8 +1,5 @@
-#ifndef GameSystem_h
-#define GameSystem_h
-
-#include <string>
-#include <conio.h>
+#ifndef GAMESYSTEM_H
+#define GAMESYSTEM_H
 
 #include "Player.h"
 #include "Level.h"
@@ -19,5 +16,5 @@ private:
 	Level m_level;
 };
 
-#endif	// GameSystem_h 
+#endif	// GAMESYSTEM_H 
 

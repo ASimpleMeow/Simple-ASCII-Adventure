@@ -1,14 +1,11 @@
-#ifndef Level_h
-#define Level_h
-
-#include <vector>
-#include <string>
-#include <fstream>
-#include <iostream>
-#include <windows.h>
+#ifndef LEVEL_H
+#define LEVEL_H
 
 #include "Player.h"
 #include "Enemy.h"
+
+#include <windows.h>
+#include <vector>
 
 class Level {
 public:
@@ -39,5 +36,5 @@ private:
 
 };
 
-#endif // !Level.h
+#endif // LEVEL_H
 
