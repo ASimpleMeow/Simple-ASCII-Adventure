@@ -7,7 +7,19 @@
 
 class Enemy : public LivingObject{
 public:
-	Enemy(std::string name, char tile, int health, int attack, int defence, int level, int experience);
+	enum class EnemyType {
+		SNAKE = 'S',
+		GOBLIN = 'g',
+		BANDIT = 'B',
+		OGRE = 'O',
+		DRAGON = 'D'
+	};
+
+	Enemy(std::string name, EnemyType type, int health, int attack, int defence, int level, int experience);
+
+private:
+	EnemyType m_type;
+
 };
 #endif // ENEMY_H
 

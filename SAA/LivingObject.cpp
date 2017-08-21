@@ -7,16 +7,15 @@ LivingObject::LivingObject(){
 }
 
 LivingObject::LivingObject(int level, int health, int attack, int defence, int experience) {
-	init("", ' ', level, health, attack, defence, experience);
+	init("", level, health, attack, defence, experience);
 }
 
-LivingObject::LivingObject(std::string name, char tile, int level, int health, int attack, int defence, int experience) {
-	init(name, tile, level, health, attack, defence, experience);
+LivingObject::LivingObject(std::string name, int level, int health, int attack, int defence, int experience) {
+	init(name, level, health, attack, defence, experience);
 }
 
-void LivingObject::init(std::string name, char tile, int level, int health, int attack, int defence, int experience) {
+void LivingObject::init(std::string name, int level, int health, int attack, int defence, int experience) {
 	m_name = name;
-	m_tile = tile;
 	m_health = health;
 	m_attack = attack;
 	m_defence = defence;
@@ -45,10 +44,6 @@ void LivingObject::setName(std::string name) {
 	m_name = name;
 }
 
-void LivingObject::setTile(char tile) {
-	m_tile = tile;
-}
-
 //Sets LivingObjects stats to the references passed 
 void LivingObject::getStats(int& level, int& experience, int& health, int& attack, int& defence) {
 	level = m_level;
@@ -60,8 +55,4 @@ void LivingObject::getStats(int& level, int& experience, int& health, int& attac
 
 std::string LivingObject::getName() {
 	return m_name;
-}
-
-char LivingObject::getTile() {
-	return m_tile;
 }

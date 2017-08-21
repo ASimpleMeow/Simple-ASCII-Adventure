@@ -12,7 +12,9 @@ public:
 	Level();
 
 	void load(std::string fileName, Player& player);
-	void print(Player& player);
+
+	void update();
+	void render(Player& player);
 	void movePlayer(char input, Player& player);
 
 
@@ -24,9 +26,10 @@ public:
 
 private:
 	void processPlayerMove(Player& player, int targetX, int targetY);
-	void battleMonster(Player& player, int targetX, int targetY);
-	void printMap();
-	void printPlayerStatus(Player& player);
+	void checkEnemy(Player& player, char tile, int targetX, int targetY);
+	void battleEnemy(Player& player, int targetX, int targetY);
+	void renderMap();
+	void renderPlayerStatus(Player& player);
 	BOOL setCursorToPosition(int x, int y);
 
 private:

@@ -17,8 +17,9 @@ void GameSystem::playGame() {
 	bool isDone = false;
 
 	while (!isDone) {
-		m_level.print(m_player);
 		playerMove();
+		m_level.update();
+		m_level.render(m_player);
 	}
 }
 

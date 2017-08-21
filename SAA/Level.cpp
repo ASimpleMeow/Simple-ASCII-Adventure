@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iostream>
 
+using EnemyType = Enemy::EnemyType;
 
 Level::Level() {
 }
@@ -41,23 +42,23 @@ void Level::load(std::string fileName, Player& player) {
 				player.setPosition(j, i);
 				break;
 			case 'S':	//Snake
-				m_enemies.push_back(Enemy("Snake", tile, 10, 3, 1, 1, 50));
+				m_enemies.push_back(Enemy("Snake",EnemyType::SNAKE, 10, 3, 1, 1, 50));
 				m_enemies.back().setPosition(j, i);
 				break;
 			case 'O':	//Ogre
-				m_enemies.push_back(Enemy("Ogre", tile, 200, 20, 20, 4, 500));
+				m_enemies.push_back(Enemy("Ogre", EnemyType::OGRE, 200, 20, 20, 4, 500));
 				m_enemies.back().setPosition(j, i);
 				break;
 			case 'B':	//Bandit
-				m_enemies.push_back(Enemy("Bandit", tile, 100, 15, 10, 3, 250));
+				m_enemies.push_back(Enemy("Bandit", EnemyType::BANDIT, 100, 15, 10, 3, 250));
 				m_enemies.back().setPosition(j, i);
 				break;
 			case 'D':	//Dragon
-				m_enemies.push_back(Enemy("Dragon", tile, 2000, 2000, 2000, 100, 100000));
+				m_enemies.push_back(Enemy("Dragon", EnemyType::DRAGON, 2000, 2000, 2000, 100, 100000));
 				m_enemies.back().setPosition(j, i);
 				break;
 			case 'g':	//Goblin
-				m_enemies.push_back(Enemy("Goblin", tile, 35, 10, 5, 2, 50));
+				m_enemies.push_back(Enemy("Goblin", EnemyType::GOBLIN, 35, 10, 5, 2, 50));
 				m_enemies.back().setPosition(j, i);
 				break;
 			}
@@ -65,30 +66,39 @@ void Level::load(std::string fileName, Player& player) {
 	}
 }
 
-void Level::print(Player& player) {
+void Level::update() {
+
+}
+
+/* RENDERING SCREEN*/
+
+//Main render function
+void Level::render(Player& player) {
 	LockWindowUpdate(GetConsoleWindow());
 	printf(std::string(10000, ' ').c_str());
 
 	setCursorToPosition(25, 0);
 	printf("THE SIMPLE ASCII ADVENTURE\n");
 	
-	printMap();
+	renderMap();
 
-	printPlayerStatus(player);
+	renderPlayerStatus(player);
 
 	setCursorToPosition(0, 20);
 
 	LockWindowUpdate(NULL);
 }
 
-void Level::printMap() {
+//Render map
+void Level::renderMap() {
 	for (int i = 0; i < m_levelData.size(); ++i) {
 		setCursorToPosition(1, i + 2);
 		std::printf("%s\n", m_levelData[i].c_str());
 	}
 }
 
-void Level::printPlayerStatus(Player& player) {
+//Render player status to the right of map
+void Level::renderPlayerStatus(Player& player) {
 	int playerLevel = 0, playerExp = 0, playerHealth = 0, playerAttack = 0, playerDefence = 0;
 	player.getStats(playerLevel, playerExp, playerHealth, playerAttack, playerDefence);
 
@@ -108,19 +118,20 @@ void Level::printPlayerStatus(Player& player) {
 	printf("Defence  : %d", playerDefence);
 }
 
+//Set the cursor position on console window
 BOOL Level::setCursorToPosition(int x, int y) {
 	m_coord.X = x;
 	m_coord.Y = y;
 	return SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), m_coord);
 }
 
+
+
 void Level::movePlayer(char input, Player& player) {
 
 	int playerX = 0;
 	int playerY = 0;
 	player.getPosition(playerX, playerY);
-
-	char moveTile;
 
 	switch (input) {
 	case 'w':		//up
@@ -169,12 +180,13 @@ void Level::processPlayerMove(Player& player, int targetX, int targetY) {
 	case '#':
 		break;
 	default:
-		battleMonster(player, targetX, targetY);
+		//checkEnemy(player, moveTile, targetX, targetY);
+		//battleEnemy(player, targetX, targetY);
 		break;
 	}
 }
 
-void Level::battleMonster(Player& player, int targetX, int targetY) {
+void Level::battleEnemy(Player& player, int targetX, int targetY) {
 	int enemyX = 0;
 	int enemyY = 0;
 	std::string enemyName = "";
@@ -200,12 +212,12 @@ void Level::battleMonster(Player& player, int targetX, int targetY) {
 			attackResult = m_enemies[i].takeDamage(attackRoll);
 			if (attackResult != 0) {
 				setTile(targetX, targetY, '.');
-				print(player);
+				render(player);
 				printf("Player has killed %s, %d experience gained\n", enemyName.c_str(), attackResult);
 				printf("--------------------------------------------\n%s",player.addExperience(attackResult).c_str());
 				m_enemies.erase(m_enemies.begin() + i);
 				system("PAUSE");
-				print(player);
+				render(player);
 				return;
 			}
 
@@ -214,16 +226,16 @@ void Level::battleMonster(Player& player, int targetX, int targetY) {
 			printf("%s attacked with attack of %d\n", enemyName.c_str(), attackRoll);
 			system("PAUSE");
 			attackResult = player.takeDamage(attackRoll);
-			print(player);
+			render(player);
 			if (attackResult != 0) {
 				setTile(playerX, playerY, 'x');
-				print(player);
+				render(player);
 				printf("\nYOU DIED!\n");
 				system("PAUSE");
 				exit(1);
 				return;
 			}
-			print(player);
+			render(player);
 			return;
 		}
 	}
