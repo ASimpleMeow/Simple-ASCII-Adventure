@@ -18,9 +18,8 @@ In this project I plan to make a Rogue/Dwarven Fortress style game using ASCII g
 The big issue I will be having would be cross-platform support, for the time being I'm focusing on Windows OS and using Windows libraries for development. However once I achieve a certain level of progress where I am satisfied, I will try make this game platform-independant, or at least be runnable on Linux systems.
 
 ## Technologies used
-1. Unreal Engine 4
-2. Visual Studio
-3. C++
+1. Visual Studio
+2. C++
 
 ## Potential Future Additions
 ### Procedural Generation
