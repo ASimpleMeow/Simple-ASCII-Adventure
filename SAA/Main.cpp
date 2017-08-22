@@ -36,7 +36,6 @@ int main() {
 
 #include <windows.h>
 
-
 int main() {
 
 	HWND console = GetConsoleWindow();
@@ -51,3 +50,5 @@ int main() {
 
 	return 0;
 }
+
+

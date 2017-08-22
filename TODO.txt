@@ -1,0 +1,5 @@
+- Abstract move function in Level for LivingObject 		=> So any LivingObject can move
+	+ Maybe put a move function in every LivingObject?
+
+- Abstract battle function in Level for LivingObject 	=> So any LivingObjects can battle
+	+ Maybe put a battle function in every LivingObject?

@@ -4,12 +4,11 @@
 #include <ctime>
 
 
-Player::Player() {
-}
+Player::Player(){}
 
 //Initialises Player with properties
-void Player::init(int level, int health, int attack, int defence, int experience) {
-	LivingObject::init("Player", '@', level, health, attack, defence, experience);
+void Player::init(int level, int health, int attack, int defence, FontColour colour, std::string name, int experience){
+	LivingObject::init('@', level, health, attack, defence, colour, name, experience);
 }
 
 

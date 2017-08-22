@@ -11,11 +11,18 @@ class Level {
 public:
 	Level();
 
-	void load(std::string fileName, Player& player);
+	void load(std::string fileName, Player* pPlayer);
 
 	void update();
-	void render(Player& player);
-	void movePlayer(char input, Player& player);
+
+	void render();
+	void renderMap();
+	void renderPlayerStatus();
+
+	void movePlayer(char input);						//NEEDS ABSTRACTION
+	void processPlayerMove(int targetX, int targetY);
+
+	void battleEnemy(int targetX, int targetY);			//NEEDS ABSTRACTION
 
 
 	//Getters
@@ -25,16 +32,13 @@ public:
 	void setTile(int x, int y, char tile);
 
 private:
-	void processPlayerMove(Player& player, int targetX, int targetY);
-	void checkEnemy(Player& player, char tile, int targetX, int targetY);
-	void battleEnemy(Player& player, int targetX, int targetY);
-	void renderMap();
-	void renderPlayerStatus(Player& player);
-	BOOL setCursorToPosition(int x, int y);
+	void processLevel();
+	void addEnemy(int posX, int posY, char tile, int health, int attack, int defence, int level, FontColour colour, std::string name, int experience);
 
 private:
 	std::vector<std::string> m_levelData;
 	std::vector<Enemy> m_enemies;
+	Player* p_Player;
 	COORD m_coord;
 
 };

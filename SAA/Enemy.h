@@ -2,23 +2,15 @@
 #define ENEMY_H
 
 #include "LivingObject.h"
+#include "Utils.h"
 
 #include <string>
 
 class Enemy : public LivingObject{
 public:
-	enum class EnemyType {
-		SNAKE = 'S',
-		GOBLIN = 'g',
-		BANDIT = 'B',
-		OGRE = 'O',
-		DRAGON = 'D'
-	};
+	Enemy();
 
-	Enemy(std::string name, EnemyType type, int health, int attack, int defence, int level, int experience);
-
-private:
-	EnemyType m_type;
+	void init(char tile, int health, int attack, int defence, int level, FontColour colour = FontColour::LIGHTGRAY, std::string name = "", int experience = 0);
 
 };
 #endif // ENEMY_H

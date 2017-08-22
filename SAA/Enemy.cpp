@@ -1,12 +1,10 @@
 #include "Enemy.h"
 
 
+Enemy::Enemy(){
 
-
-Enemy::Enemy(std::string name, EnemyType type, int health, int attack, int defence, int level, int experience) : LivingObject(){
-	init(name, health, attack, defence, level, experience);
-	m_type = type;
 }
 
-
-
+void Enemy::init(char tile, int health, int attack, int defence, int level, FontColour colour, std::string name, int experience) {
+	LivingObject::init(tile, level, health, attack, defence, colour, name, experience);
+}

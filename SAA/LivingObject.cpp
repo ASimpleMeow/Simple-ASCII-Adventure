@@ -4,23 +4,22 @@
 #include <ctime>
 
 LivingObject::LivingObject(){
+	m_level = 0;
+	m_health = 0;
+	m_attack = 0;
+	m_defence = 0;
+	m_name = "";
+	m_experience = 0;
 }
 
-LivingObject::LivingObject(int level, int health, int attack, int defence, int experience) {
-	init("", level, health, attack, defence, experience);
-}
-
-LivingObject::LivingObject(std::string name, int level, int health, int attack, int defence, int experience) {
-	init(name, level, health, attack, defence, experience);
-}
-
-void LivingObject::init(std::string name, int level, int health, int attack, int defence, int experience) {
-	m_name = name;
+void LivingObject::init(char tile, int level, int health, int attack, int defence, FontColour colour, std::string name, int experience) {
+	GameObject::init(tile, colour);
+	m_level = level;
 	m_health = health;
 	m_attack = attack;
 	m_defence = defence;
-	m_level = level;
 	m_experience = experience;
+	m_name = name;
 }
 
 int LivingObject::attack() {
@@ -39,7 +38,7 @@ int LivingObject::takeDamage(int attack) {
 	return 0;
 }
 
-//Setters
+//Set name
 void LivingObject::setName(std::string name) {
 	m_name = name;
 }
@@ -53,6 +52,8 @@ void LivingObject::getStats(int& level, int& experience, int& health, int& attac
 	defence = m_defence;
 }
 
+//Get name
 std::string LivingObject::getName() {
+
 	return m_name;
 }

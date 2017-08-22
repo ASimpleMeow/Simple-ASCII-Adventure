@@ -2,16 +2,16 @@
 #define LIVINGOBJECT_H
 
 #include "GameObject.h"
+#include "Utils.h"
 
 #include <string>
 
 class LivingObject : public GameObject{
+
 public:
 	LivingObject();
-	LivingObject(int level, int health, int attack, int defence, int experience);
-	LivingObject(std::string name, int level, int health, int attack, int defence, int experience);
 
-	virtual void init(std::string name, int level, int health, int attack, int defence, int experience);
+	virtual void init(char tile, int level, int health, int attack, int defence, FontColour colour = FontColour::LIGHTGRAY, std::string name = "", int experience = 0);
 
 	virtual int attack();
 	virtual int takeDamage(int attack);

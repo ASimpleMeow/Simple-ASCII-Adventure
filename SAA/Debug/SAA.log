@@ -1,15 +1,2 @@
-﻿  Player.cpp
-c:\users\oleksandr\desktop\other\c++  projects\workspace\saa\saa\player.cpp(23): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-c:\users\oleksandr\desktop\other\c++  projects\workspace\saa\saa\player.cpp(31): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-  Level.cpp
-c:\users\oleksandr\desktop\other\c++  projects\workspace\saa\saa\level.cpp(35): warning C4018: '<': signed/unsigned mismatch
-c:\users\oleksandr\desktop\other\c++  projects\workspace\saa\saa\level.cpp(36): warning C4018: '<': signed/unsigned mismatch
-c:\users\oleksandr\desktop\other\c++  projects\workspace\saa\saa\level.cpp(85): warning C4018: '<': signed/unsigned mismatch
-c:\users\oleksandr\desktop\other\c++  projects\workspace\saa\saa\level.cpp(123): warning C4101: 'moveTile': unreferenced local variable
-c:\users\oleksandr\desktop\other\c++  projects\workspace\saa\saa\level.cpp(189): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
-  Skipping... (no relevant changes detected)
-  Main.cpp
-  GameSystem.cpp
-  SAA.vcxproj -> C:\Users\Oleksandr\Desktop\Other\C++  Projects\workspace\SAA\Debug\SAA.exe
+﻿  SAA.vcxproj -> C:\Users\Oleksandr\Desktop\Other\C++  Projects\workspace\SAA\Debug\SAA.exe
   SAA.vcxproj -> C:\Users\Oleksandr\Desktop\Other\C++  Projects\workspace\SAA\Debug\SAA.pdb (Full PDB)
