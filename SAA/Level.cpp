@@ -1,17 +1,21 @@
+//
+//  Level.cpp
+//  SAA - Simple ASCII Adventure
+//
+//  Created by Oleksandr Kononov on 20/08/2017.
+//  Copyright © 2017 Oleksandr Kononov. All rights reserved.
+//
+
 #include "Level.h"
 #include "Utils.h"
 
 #include <string>
 #include <fstream>
-#include <iostream>
 
-Level::Level() {
-}
+Level::Level() {}
 
+//Loads level from file given
 void Level::load(std::string fileName, Player* pPlayer) {
-
-	Utils::getInstance()->setCursorVisible(false);
-	Utils::getInstance()->setFontSize(FontSize::NORMAL);
 
 	//Loads the level
 	std::ifstream file;
@@ -19,6 +23,7 @@ void Level::load(std::string fileName, Player* pPlayer) {
 	file.open(fileName);
 
 	if (file.fail()) {
+		perror("MISSING LEVEL\n");
 		perror(fileName.c_str());
 		system("PAUSE");
 		exit(1);
@@ -38,6 +43,7 @@ void Level::load(std::string fileName, Player* pPlayer) {
 	processLevel();
 }
 
+//Process the level data to initialise necessary GameObjects and set their position
 void Level::processLevel() {
 	char tile;
 	Enemy* pEnemy;
@@ -70,6 +76,7 @@ void Level::processLevel() {
 	}
 }
 
+//Initialise an Enemy with set position
 void Level::addEnemy(int posX, int posY, char tile, int health, int attack, int defence, int level, FontColour colour, std::string name, int experience) {
 	Enemy e;
 	e.init(tile, health, attack, defence, level, colour, name, experience);
@@ -86,9 +93,11 @@ void Level::update() {
 //Main render function
 void Level::render() {
 	LockWindowUpdate(GetConsoleWindow());
-	printf(std::string(10000, ' ').c_str());
 
-	Utils::getInstance()->setCursorToPosition(25, 0);
+	Utils::getInstance()->clearScreen();
+	Utils::getInstance()->setFontColour(FontColour::WHITE);
+	Utils::getInstance()->setCursorToPosition(26, 0);
+
 	printf("THE SIMPLE ASCII ADVENTURE\n");
 	
 	renderMap();
@@ -103,37 +112,44 @@ void Level::render() {
 //Render map
 void Level::renderMap() {
 
-	char tile = ' ';
-	int eX = 0;
-	int eY = 0;
+	Utils::getInstance()->setFontColour(FontColour::LIGHTGRAY);
 
-	Utils::getInstance()->setCursorToPosition(0, 1);
+	int gameObjectX = 0;	//GameObject X coordinate
+	int gameObjectY = 0;	//GameObject Y coordinate
+	int yOffset = 1;		//Amount down the map is rendered from the top
+	int xOffset = 1;		//Amount right the map is rendered from the left
 
-	printf(" ");
+	//RENDER WALLS AND GROUND
+	for (int row = 0; row < m_levelData.size(); ++row) {
 
-	for (int i = 0; i < m_levelData.size(); ++i) {
-		for (int j = 0; j < m_levelData[i].size(); ++j) {
-			tile = m_levelData[i][j];
-			if (tile == '.' || tile == '#' || tile == '@') {
-				Utils::getInstance()->setFontColour(FontColour::LIGHTGRAY);
-				printf("%c", m_levelData[i][j]);
-			}
-			else {
-				for (int enemyIndex = 0; enemyIndex < m_enemies.size(); ++enemyIndex) {
-					m_enemies[enemyIndex].getPosition(eX, eY);
-					if (eX == j && eY == i) {
-						Utils::getInstance()->setFontColour(m_enemies[enemyIndex].getColour());
-						printf("%c", m_enemies[enemyIndex].getTile());
-					}
-				}
-			}
+		Utils::getInstance()->setCursorToPosition(xOffset, yOffset + row);
+
+		for (int column = 0; column < m_levelData[row].size(); ++column) {
+			printf("%c", m_levelData[row][column]);
 		}
-		printf("\n ");
+	}
+
+	//RENDER PLAYER
+	p_Player->getPosition(gameObjectX, gameObjectY);
+	Utils::getInstance()->setCursorToPosition(gameObjectX + xOffset, gameObjectY+ yOffset);
+	Utils::getInstance()->setFontColour(p_Player->getColour());
+	printf("%c", p_Player->getTile());
+
+
+	//RENDER ENEMIES
+	for (std::vector<Enemy>::iterator it = m_enemies.begin(); it != m_enemies.end(); ++it) {
+		it->getPosition(gameObjectX, gameObjectY);
+		Utils::getInstance()->setCursorToPosition(gameObjectX + xOffset, gameObjectY + yOffset);
+		Utils::getInstance()->setFontColour(it->getColour());
+		printf("%c", it->getTile());
 	}
 }
 
 //Render player status to the right of map
 void Level::renderPlayerStatus() {
+
+	Utils::getInstance()->setFontColour(FontColour::WHITE);
+
 	int playerLevel = 0, playerExp = 0, playerHealth = 0, playerAttack = 0, playerDefence = 0;
 	p_Player->getStats(playerLevel, playerExp, playerHealth, playerAttack, playerDefence);
 
@@ -153,7 +169,7 @@ void Level::renderPlayerStatus() {
 	printf("Defence  : %d", playerDefence);
 }
 
-
+//Determine the input from User to move Player
 void Level::movePlayer(char input) {
 	int playerX = 0;
 	int playerY = 0;
@@ -181,14 +197,17 @@ void Level::movePlayer(char input) {
 	}
 }
 
+//Gets the tile at positon x, y
 char Level::getTile(int x, int y) {
 	return m_levelData[y][x];
 }
 
+//Sets a tile at position x, y
 void Level::setTile(int x, int y, char tile) {
 	m_levelData[y][x] = tile;
 }
 
+//Process players move to position given
 void Level::processPlayerMove(int targetX, int targetY) {
 
 	int playerX = 0;
@@ -198,20 +217,20 @@ void Level::processPlayerMove(int targetX, int targetY) {
 	char moveTile = getTile(targetX, targetY);
 
 	switch (moveTile) {
-	case '.':
+	case '.':										//Floor - Allow movement there
 		p_Player->setPosition(targetX, targetY);
 		setTile(playerX, playerY, '.');
 		setTile(targetX, targetY, '@');
 		break;
-	case '#':
+	case '#':										//Wall
 		break;
-	default:
-		//checkEnemy(player, moveTile, targetX, targetY);
+	default:										//Enemy encounter
 		battleEnemy(targetX, targetY);
 		break;
 	}
 }
 
+//Start a battle with enemy at position given
 void Level::battleEnemy(int targetX, int targetY) {
 	int enemyX = 0;
 	int enemyY = 0;
@@ -224,45 +243,44 @@ void Level::battleEnemy(int targetX, int targetY) {
 	int attackRoll = 0;
 	int attackResult = 0;
 
-	for (int i = 0; i < m_enemies.size(); ++i) {
+	for (std::vector<Enemy>::iterator it = m_enemies.begin(); it != m_enemies.end(); ++it) {
 		
-		m_enemies[i].getPosition(enemyX, enemyY);
-		enemyName = m_enemies[i].getName();
+		it->getPosition(enemyX, enemyY);
+		enemyName = it->getName();
 
-		if (targetX == enemyX && targetY == enemyY) {
+		if (targetX != enemyX && targetY != enemyY) continue;
 
-			//Battle
-			attackRoll = p_Player->attack();
-			printf("Player attacked %s with attack of %d\n", enemyName.c_str(), attackRoll);
-			system("PAUSE");
-			attackResult = m_enemies[i].takeDamage(attackRoll);
-			if (attackResult != 0) {
-				setTile(targetX, targetY, '.');
-				render();
-				printf("Player has killed %s, %d experience gained\n", enemyName.c_str(), attackResult);
-				printf("--------------------------------------------\n%s", p_Player->addExperience(attackResult).c_str());
-				m_enemies.erase(m_enemies.begin() + i);
-				system("PAUSE");
-				render();
-				return;
-			}
+		//BATTLE START
+		std::string battleMessage = "";
+		bool someoneDead = false;
 
-			//Monster turn
-			attackRoll = m_enemies[i].attack();
-			printf("%s attacked with attack of %d\n", enemyName.c_str(), attackRoll);
-			system("PAUSE");
-			attackResult = p_Player->takeDamage(attackRoll);
+		//Players Turn
+		someoneDead = p_Player->attack(*it, &battleMessage);
+		printf("%s\n", battleMessage.c_str());
+
+		if (someoneDead) {
+			m_enemies.erase(it);
+			setTile(targetX, targetY, '.');
+			break;
+		}
+
+		//Enemy Turn
+		someoneDead = it->attack(*p_Player, &battleMessage);
+		printf("%s\n", battleMessage.c_str());
+
+		if (attackResult != 0) {
+			setTile(playerX, playerY, 'x');
 			render();
-			if (attackResult != 0) {
-				setTile(playerX, playerY, 'x');
-				render();
-				printf("\nYOU DIED!\n");
-				system("PAUSE");
-				exit(1);
-				return;
-			}
-			render();
+			printf("\nYOU DIED!\n");
+			system("PAUSE");
+			exit(1);
 			return;
 		}
+
+		break;
 	}
+
+	system("PAUSE");
+	render();
+	return;
 }

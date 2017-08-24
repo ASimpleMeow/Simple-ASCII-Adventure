@@ -3,3 +3,8 @@
 
 - Abstract battle function in Level for LivingObject 	=> So any LivingObjects can battle
 	+ Maybe put a battle function in every LivingObject?
+	
+- Make a cutscene features
+	+ Create a cutscene class which will load a cutscene from text file (similar to level)
+	  It will then print out 2-3 lines onto screen. Put the thread to sleep for 2 seconds and
+	  display the next message. Once it's over, load level

@@ -1,3 +1,11 @@
+//
+//  Utils.h
+//  SAA - Simple ASCII Adventure
+//
+//  Created by Oleksandr Kononov on 22/08/2017.
+//  Copyright © 2017 Oleksandr Kononov. All rights reserved.
+//
+
 #ifndef UTILS_H
 #define UTILS_H
 
@@ -24,6 +32,7 @@ public:
 	void setCursorVisible(bool showCursor);
 	void setFontSize(const FontSize size);
 	void setFontColour(const FontColour colour);
+	void clearScreen();
 
 private:
 	static bool instanceActive;

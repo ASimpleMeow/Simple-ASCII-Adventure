@@ -1,18 +1,28 @@
+//
+//  Utils.cpp
+//  SAA - Simple ASCII Adventure
+//
+//  Created by Oleksandr Kononov on 22/08/2017.
+//  Copyright © 2017 Oleksandr Kononov. All rights reserved.
+//
+
 #include "Utils.h"
 
+#include <string>
 
-bool Utils::instanceActive = false;
-Utils* Utils::utils = NULL;
+bool Utils::instanceActive = false;		//Initially the instance is not active
+Utils* Utils::utils = NULL;				
 
+//Constructor gets the console handle
 Utils::Utils() {
 	m_handle = GetStdHandle(STD_OUTPUT_HANDLE);
 }
-
 
 Utils::~Utils() {
 	instanceActive = false;
 }
 
+//Get instance of the Utils singleton
 Utils* Utils::getInstance() {
 
 	if (!instanceActive) {
@@ -70,4 +80,10 @@ void Utils::setFontSize(const FontSize size) {
 //Sets font colour
 void Utils::setFontColour(const FontColour colour) {
 	SetConsoleTextAttribute(m_handle, static_cast<int>(colour));
+}
+
+//Screens screen
+void Utils::clearScreen() {
+	setCursorToPosition(0, 0);
+	printf(std::string(3040,' ').c_str());
 }

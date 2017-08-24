@@ -4,7 +4,14 @@ _A small C++ ASCII RPG game project_
 
 ## Introduction
 ### Brief Description
-In this project I plan to make a Rogue/Dwarven Fortress style game using ASCII graphics and coded in C++ language. 
+In this project I plan to make a Rogue/Dwarven Fortress style game using ASCII graphics and coded in C++ language. With some ASCII cutscenes sprinkled in.
+
+## Implemented Features
++ Player movement
++ Coloured tiles for GameObjects
++ Battle between Player and Enemies
++ Level up from battle -> improve stats
++ Cutscene feature
 
 ## Development Aims
 + Player moving around in the world of ASCII

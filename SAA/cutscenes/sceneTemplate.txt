@@ -1,0 +1,7 @@
+2500,2
+-----------------------------------------
+Above is a ruler for measuring sentences
+  First number is deltaSleep for scene
+  Second is number of lines per scene
+  For this cutscene, delay will be 2.5
+ and 2 lines will be on screen per scene

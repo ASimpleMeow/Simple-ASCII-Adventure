@@ -1,3 +1,11 @@
+//
+//  LivingObject.h
+//  SAA - Simple ASCII Adventure
+//
+//  Created by Oleksandr Kononov on 22/08/2017.
+//  Copyright © 2017 Oleksandr Kononov. All rights reserved.
+//
+
 #ifndef LIVINGOBJECT_H
 #define LIVINGOBJECT_H
 
@@ -10,18 +18,20 @@ class LivingObject : public GameObject{
 
 public:
 	LivingObject();
+	virtual ~LivingObject() = 0;	//To make this class abstract
 
 	virtual void init(char tile, int level, int health, int attack, int defence, FontColour colour = FontColour::LIGHTGRAY, std::string name = "", int experience = 0);
 
-	virtual int attack();
+	virtual bool attack(LivingObject& other, std::string* message = NULL);
 	virtual int takeDamage(int attack);
+	virtual std::string addExperience(int experience);
 
 	//Setters
 	virtual void setName(std::string name);
 
 	//Getters
 	virtual void getStats(int& level, int& experience, int& health, int& attack, int& defence);
-	virtual std::string getName();
+	virtual std::string& getName();
 
 protected:
 	std::string m_name;

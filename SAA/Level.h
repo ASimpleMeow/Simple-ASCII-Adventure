@@ -1,10 +1,17 @@
+//
+//  Level.h
+//  SAA - Simple ASCII Adventure
+//
+//  Created by Oleksandr Kononov on 20/08/2017.
+//  Copyright © 2017 Oleksandr Kononov. All rights reserved.
+//
+
 #ifndef LEVEL_H
 #define LEVEL_H
 
 #include "Player.h"
 #include "Enemy.h"
 
-#include <windows.h>
 #include <vector>
 
 class Level {
@@ -39,7 +46,6 @@ private:
 	std::vector<std::string> m_levelData;
 	std::vector<Enemy> m_enemies;
 	Player* p_Player;
-	COORD m_coord;
 
 };
 
