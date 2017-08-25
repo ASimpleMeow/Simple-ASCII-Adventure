@@ -26,6 +26,7 @@ int main() {
 
 
 	GameSystem gameSystem("levels/level1.txt", "cutscenes/cutscene1.txt");
+	//GameSystem gameSystem("levels/level1.txt");
 
 	gameSystem.playGame();
 

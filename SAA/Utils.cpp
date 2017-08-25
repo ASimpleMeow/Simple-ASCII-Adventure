@@ -87,3 +87,8 @@ void Utils::clearScreen() {
 	setCursorToPosition(0, 0);
 	printf(std::string(3040,' ').c_str());
 }
+
+//Flushes input buffer for console
+void Utils::flushInputBuffer() {
+	FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
+}

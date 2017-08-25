@@ -24,7 +24,8 @@ public:
 private:
 	void update();
 	void render();
-	void playerMove();
+	void input();
+	bool keyPressed(int key) const;
 
 private:
 	Player m_player;

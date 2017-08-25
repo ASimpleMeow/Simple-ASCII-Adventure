@@ -81,6 +81,7 @@ void Cutscene::render() {
 		}
 	}
 
+	Utils::getInstance()->flushInputBuffer();
 	Utils::getInstance()->clearScreen();
 	m_isRunning = false;
 }

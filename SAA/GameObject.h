@@ -20,12 +20,14 @@ public:
 	virtual void init(char tile, FontColour colour = FontColour::LIGHTGRAY);
 
 	//Getters
-	virtual void getPosition(int& x, int&y);
-	virtual FontColour& getColour();
-	virtual char getTile();
+	virtual void getPosition(int& x, int&y) const;
+	virtual FontColour getColour() const;
+	virtual char getTile() const;
 
 	//Setters
 	virtual void setPosition(int x, int y);
+	virtual void setTile(char tile);
+	virtual void setColour(FontColour colour);
 
 protected:
 	//Position coordinates

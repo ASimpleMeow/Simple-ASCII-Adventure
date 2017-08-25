@@ -34,6 +34,25 @@ void LivingObject::init(char tile, int level, int health, int attack, int defenc
 	m_name = name;
 }
 
+//Move the LivingObject
+void LivingObject::move(Movement move) {
+
+	switch (move) {
+	case Movement::UP:
+		setPosition(m_x, m_y - 1);
+		break;
+	case Movement::DOWN:
+		setPosition(m_x, m_y + 1);
+		break;
+	case Movement::LEFT:
+		setPosition(m_x - 1, m_y);
+		break;
+	case Movement::RIGHT:
+		setPosition(m_x + 1, m_y);
+		break;
+	}
+}
+
 //Attacks another LivingObject
 //Using uniformly random attack in range of this objects attack stat
 //deal damage to the other LivingObject
@@ -101,7 +120,7 @@ void LivingObject::setName(std::string name) {
 }
 
 //Sets LivingObjects stats to the references passed 
-void LivingObject::getStats(int& level, int& experience, int& health, int& attack, int& defence) {
+void LivingObject::getStats(int& level, int& experience, int& health, int& attack, int& defence) const {
 	level = m_level;
 	experience = m_experience;
 	health = m_health;
@@ -110,6 +129,6 @@ void LivingObject::getStats(int& level, int& experience, int& health, int& attac
 }
 
 //Get name
-std::string& LivingObject::getName() {
+std::string LivingObject::getName() const {
 	return m_name;
 }

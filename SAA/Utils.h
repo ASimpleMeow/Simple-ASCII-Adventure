@@ -33,6 +33,7 @@ public:
 	void setFontSize(const FontSize size);
 	void setFontColour(const FontColour colour);
 	void clearScreen();
+	void flushInputBuffer();
 
 private:
 	static bool instanceActive;

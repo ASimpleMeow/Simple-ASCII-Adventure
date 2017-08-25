@@ -10,7 +10,6 @@
 #define ENEMY_H
 
 #include "LivingObject.h"
-#include "Utils.h"
 
 #include <string>
 

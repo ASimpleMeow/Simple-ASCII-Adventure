@@ -7,6 +7,7 @@
 //
 
 #include "GameSystem.h"
+#include "Utils.h"
 
 #include <conio.h>
 
@@ -23,7 +24,7 @@ GameSystem::GameSystem(std::string levelFileName, std::string cutsceneFileName) 
 
 //Updates the logic of the game
 void GameSystem::update() {
-	playerMove();
+	input();
 	m_level.update();
 }
 
@@ -43,8 +44,21 @@ void GameSystem::playGame() {
 	}
 }
 
-//Controller for the player
-void GameSystem::playerMove() {
+//Controller for input
+void GameSystem::input() {
+	
+	/*
+	if (keyPressed('W')) {
+		m_player.move(LivingObject::Movement::UP);
+	}else if (keyPressed('A')) {
+		m_player.move(LivingObject::Movement::LEFT);
+	} else if (keyPressed('S')) {
+		m_player.move(LivingObject::Movement::DOWN);
+	} else if (keyPressed('D')) {
+		m_player.move(LivingObject::Movement::RIGHT);
+	} else if (keyPressed(VK_SPACE))
+		printf("OK");
+	*/
 
 	if (!_kbhit()) return;
 
@@ -52,3 +66,8 @@ void GameSystem::playerMove() {
 
 	m_level.movePlayer(input);
 }
+
+bool GameSystem::keyPressed(int key) const {
+	return (GetAsyncKeyState(key) & 0x8000 != 0);
+}
+

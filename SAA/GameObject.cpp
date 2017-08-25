@@ -25,25 +25,35 @@ void GameObject::init(char tile, FontColour colour) {
 	m_colour = colour;
 }
 
-//Sets GameObjects position to the references passed
-void GameObject::getPosition(int& x, int& y){
-	x = m_x;
-	y = m_y;
-}
-
 //Sets position of GameObject
 void GameObject::setPosition(int x, int y){
 	m_x = x;
 	m_y = y;
 }
 
+//Sets tile
+void GameObject::setTile(char tile) {
+	m_tile = tile;
+}
+
+//Sets colour
+void GameObject::setColour(FontColour colour) {
+	m_colour = colour;
+}
+
+//Gets GameObjects position to the references passed
+void GameObject::getPosition(int& x, int& y) const {
+	x = m_x;
+	y = m_y;
+}
+
 //Gets colour of tile (font)
-FontColour& GameObject::getColour() {
+FontColour GameObject::getColour() const{
 	return m_colour;
 }
 
 //Gets tile
-char GameObject::getTile() {
+char GameObject::getTile() const{
 	return m_tile;
 }
 

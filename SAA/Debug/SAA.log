@@ -1,22 +1,14 @@
 ﻿  Utils.cpp
+  Cutscene.cpp
+  Generating Code...
+  Skipping... (no relevant changes detected)
   Player.cpp
+  Main.cpp
   LivingObject.cpp
-c:\users\oleksandr\desktop\other\c++  projects\workspace\saa\saa\livingobject.cpp(37): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\oleksandr\desktop\other\c++  projects\workspace\saa\saa\livingobject.cpp(73): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-c:\users\oleksandr\desktop\other\c++  projects\workspace\saa\saa\livingobject.cpp(81): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+  LevelStructure.cpp
   Level.cpp
-c:\users\oleksandr\desktop\other\c++  projects\workspace\saa\saa\level.cpp(52): warning C4018: '<': signed/unsigned mismatch
-c:\users\oleksandr\desktop\other\c++  projects\workspace\saa\saa\level.cpp(53): warning C4018: '<': signed/unsigned mismatch
-c:\users\oleksandr\desktop\other\c++  projects\workspace\saa\saa\level.cpp(50): warning C4101: 'pEnemy': unreferenced local variable
-c:\users\oleksandr\desktop\other\c++  projects\workspace\saa\saa\level.cpp(123): warning C4018: '<': signed/unsigned mismatch
-c:\users\oleksandr\desktop\other\c++  projects\workspace\saa\saa\level.cpp(127): warning C4018: '<': signed/unsigned mismatch
   GameSystem.cpp
   GameObject.cpp
   Enemy.cpp
-  Cutscene.cpp
-  Generating Code...
-  Compiling...
-  Main.cpp
-  Generating Code...
   SAA.vcxproj -> C:\Users\Oleksandr\Desktop\Other\C++  Projects\workspace\SAA\Debug\SAA.exe
   SAA.vcxproj -> C:\Users\Oleksandr\Desktop\Other\C++  Projects\workspace\SAA\Debug\SAA.pdb (Full PDB)
