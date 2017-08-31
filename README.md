@@ -1,4 +1,4 @@
-# Simple ASCII Adventure Game
+# Simple ASCII Adventure Game (Put on hold)
 ---
 _A small C++ ASCII RPG game project_
 
